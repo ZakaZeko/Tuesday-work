@@ -1,16 +1,35 @@
+
+
+
 if (Meteor.isClient) {
-  // counter starts at 0
 
 
   Template.hello.helpers({
+      Counter: function(){
+
+      return Session.get("Counter");
+    }
+
 
   });
 
   Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
+
+    'submit form' : function(event){
+
+
+        event.preventDefault();
+
+      var oURL = event.target.oURlTag.value;
+
+
+        oURL = oURL + " This is auto generated";
+
+      Session.set("Counter",oURL);
+
 
     }
+
   });
 }
 

@@ -1,26 +1,46 @@
-<head xmlns="http://www.w3.org/1999/html">
-  <title>URL_shortner</title>
+<head>
+  <title>Hello</title>
 </head>
 
 <body>
   <h1>Welcome to Meteor!</h1>
 
   {{> hello}}
+
+
 </body>
 
 <template name="hello">
 
 
-<Form>
 
 
-    Please inputed the URL here
-    <label>
-    <input type="text" name="oURl">
-    </label>
+<Form action="URL_shortner.js">
+
+
+    Please enter the URL here
+    <br><br>
+    <input type="text" name="oURlTag">
+
+
+    <button id="Request" type="submit" >Shorten URL</button>
+
+
+
+
+
 
 
 </Form>
+
+
+    <br><br>
+    This is the new Shortened URL:
+
+    <br>
+    {{Counter}}
+
+    <br>
 
 
 
