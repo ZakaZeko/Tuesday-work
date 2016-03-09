@@ -4,6 +4,7 @@
 if (Meteor.isClient) {
 
 
+
   Template.hello.helpers({
       Counter: function(){
 
@@ -30,13 +31,74 @@ if (Meteor.isClient) {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
   });
 }
 
 //This is a
 
 if (Meteor.isServer) {
+
+
+
   Meteor.startup(function () {
+
+
+
+
+
+
+
+      var URLrequested = Meteor.absoluteUrl();
+
+      var TheURL = "http://localhost:3000/0001";
+
+
+
+
+      if(URLrequested == TheURL){
+
+         window.location.href = "www.google.com";
+
+
+      }
+
     // code to run on server at startup
   });
+
+
+    Meteor.methods({
+        'func' : function(argument){
+            var TheURL = "http://localhost:3000/0001";
+
+            if(argument == TheURL){
+
+                return "www.google.com";
+            }else {
+
+                return "www.bing.com";
+            }
+
+
+
+        }
+    });
+
+
+
+
 }
+
+
+
+
