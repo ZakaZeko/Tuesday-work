@@ -1,6 +1,9 @@
 
 
 
+
+
+
 if (Meteor.isClient) {
 
 
@@ -24,7 +27,8 @@ if (Meteor.isClient) {
       var oURL = event.target.oURlTag.value;
 
 
-        oURL = oURL + " This is auto generated";
+
+
 
       Session.set("Counter",oURL);
 
@@ -32,17 +36,45 @@ if (Meteor.isClient) {
     }
 
 
-
-
-
-
-
-
-
-
-
-
   });
+
+
+    window.onload = function(){
+
+          Meteor.call("func",window.location.href, function(error,result){
+
+              if(error){
+
+                  alert("error");
+
+              }else {
+
+
+
+
+                  if(result != "False"){
+
+                      if(result != "Skip" ){
+
+                          window.location = result;
+
+                      }
+
+                  }else {
+
+                      alert("Please enter valid URL")
+                  }
+
+              }
+
+
+
+
+          });
+
+    };
+
+
 }
 
 //This is a
@@ -50,54 +82,66 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
 
+ TheDataBase = new  Mongo.Collection('URLS');
+
 
   Meteor.startup(function () {
 
-
-
-
-
-
-
-      var URLrequested = Meteor.absoluteUrl();
-
-      var TheURL = "http://localhost:3000/0001";
-
-
-
-
-      if(URLrequested == TheURL){
-
-         window.location.href = "www.google.com";
-
-
-      }
-
-    // code to run on server at startup
   });
 
 
+
+
+
+
     Meteor.methods({
-        'func' : function(argument){
-            var TheURL = "http://localhost:3000/0001";
+        'func' : function(argument) {
 
-            if(argument == TheURL){
 
-                return "www.google.com";
-            }else {
 
-                return "www.bing.com";
+
+
+
+            var TheHtml = "http://localhost:3000/0001";
+
+
+            if (argument === TheHtml) {
+
+                return "http://google.com";
+
+
+            } else if (argument === "http://localhost:3000/") {
+
+                return "Skip";
+
+            } else {
+
+                return "False";
             }
 
+        },
+
+
+
+        'CreateURL' : function(arrg){
+
+            
+
+            TheDataBase.insert(arrg);
 
 
         }
+
+
+
+
     });
 
-
-
-
 }
+
+
+
+
 
 
 
